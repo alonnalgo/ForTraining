@@ -13,6 +13,8 @@ public class ContactSimpleDAO implements ContactDAO {
         addContact(new Contact("Андрей", "Соколов", "+7-911-890-7766", "sokolov@yandex.ru"));
         addContact(new Contact("Сергей", "Иванов", "+7-911-890-7755", "ivanov@google.com"));
         addContact(new Contact("Татьяна", "Семенова", "+7-911-890-1164", "semenova@mail.ru"));
+        addContact(new Contact("Татьяна", "Семенова", "+7-911-890-1164", "semenova@mail.ru"));
+        addContact(new Contact("Татьяна", "Семенова", "+7-911-890-1164", "semenova@mail.ru"));
     }
 
     @Override

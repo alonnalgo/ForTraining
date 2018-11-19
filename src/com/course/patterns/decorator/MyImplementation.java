@@ -33,6 +33,7 @@ class WriteDecorator implements IWrite {
 }
 
 class WritePunktir extends WriteDecorator{
+
     WritePunktir(IWrite iwriteInstatnce) {
         super(iwriteInstatnce);
     }
