@@ -15,7 +15,7 @@ public class SimpleReflectionExample {
 
     private static void demoReflection() throws Exception {
         // Заружаем описание класса
-        Class example = Class.forName("forTraining.reflection.simpleClass.SimpleClass");
+        Class example = Class.forName("SimpleClass");
         SimpleClass sc = (SimpleClass) example.newInstance();
 
         // Обращение к полю

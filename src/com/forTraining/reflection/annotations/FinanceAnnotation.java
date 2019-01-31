@@ -5,5 +5,5 @@ import java.lang.annotation.RetentionPolicy;
 
 @Retention(RetentionPolicy.RUNTIME)
 public @interface FinanceAnnotation {
-    String financeBuilder() default "forTraining.reflection.DbFinanceInfoBuilder";
+    String financeBuilder() default "DbFinanceInfoBuilder";
 }

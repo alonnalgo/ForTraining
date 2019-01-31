@@ -4,7 +4,7 @@ import java.lang.annotation.Annotation;
 
 import forTraining.reflection.annotations.FinanceAnnotation;
 
-@FinanceAnnotation(financeBuilder = "forTraining.reflection.WebFinanceInfoBuilder")
+@FinanceAnnotation(financeBuilder = "WebFinanceInfoBuilder")
 public class FinanceInfoBuilderFactory {
 
     private static final String BUILDER_CLASS = "builder.class";
