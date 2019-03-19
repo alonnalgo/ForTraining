@@ -11,7 +11,7 @@ public class Meeting {
         return parseArrayToString(peoples);
     }
 
-    private static String[] swapNameAndLastName(String[] str) {
+    private static void swapNameAndLastName(String[] str) {
         for (int i = 0; i < str.length; i++) {
             for (int j = 0; j < str[i].length(); j++) {
                 if (str[i].charAt(j) == ':') {
@@ -19,13 +19,12 @@ public class Meeting {
                 }
             }
         }
-        return str;
     }
 
     private static String parseArrayToString(String[] str) {
         String result = "";
-        for (int i = 0; i < str.length; i++) {
-            result += "(" + str[i] + ")";
+        for (String s : str) {
+            result += "(" + s + ")";
         }
         return result;
     }
