@@ -1,46 +1,29 @@
-name: 'Customer Repo CI/CD'
+name: 'Your Repo CI/CD Yaml Workflow'
 on:
   pull_request:
     branches:
       - 'main'
 jobs:
-  algosec-risk-analysis:
-     name: 'Algosec Risk Analysis'
-     runs-on: ubuntu-latest
-#    permissions:
-#       contents: 'read'
-#       id-token: 'write'
-     steps:
-        - name: 'checkout'
-          uses: actions/checkout@v3
-        - name: Authenticate to Google Cloud
-          uses: google-github-actions/auth@v0.7.3
-          with:
-            credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
-        - name: 'Set up Cloud SDK'
-          uses: 'google-github-actions/setup-gcloud@v0'
-        - name: 'Use gcloud CLI'
-          run: 'gcloud info'
-        - name: debug
-          uses: hmarr/debug-action@v2
-        - name: Algosec Risk Analysis Action
-          uses: algosec/connectivity-risk-analysis-action@v0.0.6
-          env:
-            USE_CHECKOUT: true
-            MODE: continue_on_error
-            FRAMEWORK_TYPE: terraform
-            VCS_TYPE: github
-            CF_API_URL: ${{ secrets.API_URL }}
-            CF_LOGIN_API: ${{ secrets.CF_LOGIN_API }}
-            CF_TENANT_ID: ${{ secrets.TENANT_ID }}
-            CF_CLIENT_ID: ${{ secrets.CF_CLIENT_ID }}
-            CF_CLIENT_SECRET: ${{ secrets.CF_CLIENT_SECRET }}
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-            GITHUB_SHA: ${{ github.sha }}
-            GITHUB_WORKSPACE: ${{ github.workspace }}
-            AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-            AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-            ARM_TENANT_ID: ${{ secrets.AZURE_TENANT_ID }}
-            ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-            ARM_CLIENT_ID: ${{ secrets.AZURE_CLIENT_ID }}
-            ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
+  algosec-iac-connectivity-risk-analysis:
+    name: 'Algosec IAC Connectivity Risk Analysis'
+    runs-on: ubuntu-latest
+    steps:
+      # use @actions/checkout@v3 to checkout the repo and add "USE_CHECKOUT: true" under "env:"
+      - name: Checkout Repo
+        uses: actions/checkout@v3
+      # must use @actions/checkout@v3 before Authenticate to Google Cloud action
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v0.7.3
+        with:
+          credentials_json: '${{ secrets.GCP_CREDENTIALS }}'
+      - name: Connectivity Risk Analysis
+        uses: algosec/connectivity-risk-analysis-action@v0.0.6
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CF_TENANT_ID: ${{ secrets.CF_TENANT_ID }}
+          CF_CLIENT_ID: ${{ secrets.CF_CLIENT_ID }}
+          CF_CLIENT_SECRET: ${{ secrets.CF_CLIENT_SECRET }}
+          # AWS Environment Variables/ External Action https://github.com/marketplace/actions/configure-aws-credentials-action-for-github-actions
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          USE_CHECKOUT: true
