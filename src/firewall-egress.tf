@@ -1,13 +1,17 @@
-resource "google_compute_firewall" "o03-ni-gcp" {
-  name = "devsecops-fw-single-ip-egress"
+resource "google_compute_firewall" "o01-ni-gcp-copy" {
+  name = "devsecops-fw-multi-ip-egress"
   network = "devsecops-network-gcp"
 
   allow {
-    protocol = "udp"
+    protocol = "tcp"
   }
 
   direction = "EGRESS"
-  priority = "2300"
+  priority = "2400"
   destination_ranges = [
-    "192.168.1.1/32"]
+    "192.168.1.1/32",
+    "192.168.1.2/32",
+    "192.168.1.3/32",
+    "192.168.1.4/32",
+    "192.168.1.5/32"]
 }
